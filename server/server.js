@@ -1,21 +1,46 @@
-const express = require('express')
+const express = require('express');
 const path = require('path');
-const app = express()
+const app = express();
+const PORT = 3000;
 
+// Require in routers.
+// const authRouter = require('./routes/authRouter');
+const jobRouter = require('./routes/jobRouter');
+const userRouter = require('./routes/userRouter');
+const authRouter = require('./routes/authRouter');
+
+// Serves static file from the dist directory.
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+// Handles all requests to the auth endpoint.
+app.use('/auth', authRouter);
 
-/*
-create user, start session
-*/
-app.post('/signup', (req, res) => {
+// Handles all requests to the jobs endpoint.
+app.use('/job', jobRouter);
 
+// Handles all requests to the user endpoint.
+app.use('/user', userRouter);
+
+// Error handler for requests to undefined routes.
+app.use('*', (req, res) =>
+  res.status(404).send('Cannot server request to undefined endpoint')
+);
+
+// Global error handler.
+app.use((err, req, res, next) => {
+  const defaultError = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+
+  const customError = Object.assign({}, defaultError, err);
+
+  console.log(customError.log);
+
+  return res.status(customError.status).json(customError.message);
 });
 
-app.listen(3000, () => {
-  console.log("Hi guys!")
-})
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
