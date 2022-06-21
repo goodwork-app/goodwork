@@ -9,6 +9,13 @@ app.get('/', (req, res) => {
   res.send('hello world')
 })
 
+/*
+create user, start session
+*/
+app.post('/signup', (req, res) => {
+
+});
+
 app.listen(3000, () => {
   console.log("Hi guys!")
 })
