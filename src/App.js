@@ -1,22 +1,14 @@
 
-import React from "react";
-import 'bootstrap';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import LoginModule from './components/login.jsx';
 
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-        <button type="button" className="btn btn-primary">
-          Click to widen
-        </button>
-      </>
-    );
-  }
-}
+function App() {
+  return (
+    <div>
+      <LoginModule />
+    </div>
+  );
+};
 
 export default App;
