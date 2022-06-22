@@ -25,7 +25,7 @@ app.use('/user', userRouter);
 
 // Error handler for requests to undefined routes.
 app.use((req, res) =>
-  res.status(404).send('Cannot server request to undefined endpoint')
+  res.status(404).send('Cannot serve request to undefined endpoint')
 );
 
 // Global error handler.

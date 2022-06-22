@@ -17,6 +17,10 @@ const jobSchema = new mongoose.Schema(
       enum: ['Applied', 'Interviewed', 'Hired'],
       default: 'Applied',
     },
+    link: String,
+    notes: String,
+    values: [String],
+    priorities: [String],
   },
   { timestamps: true }
 );
