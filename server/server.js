@@ -3,8 +3,14 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+//Cookie parser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+// Parse incoming json
+app.use(express.json());
+
 // Require in routers.
-// const authRouter = require('./routes/authRouter');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
