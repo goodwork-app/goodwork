@@ -1,27 +1,12 @@
 const mongoose = require('mongoose');
+require('dotenv').config;
 
-const MONGO_URI =
-  'mongodb+srv://goodwork:goodwork-la50@goodwork-cluster.jhyos.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
   .connect(MONGO_URI, { dbName: 'goodwork' })
   .then(() => console.log('Connected to mongodb'))
   .catch((err) => console.log(err));
-
-const jobSchema = new mongoose.Schema(
-  {
-    company: String,
-    jobTitle: String,
-    status: {
-      type: String,
-      enum: ['Applied', 'Interviewed', 'Hired'],
-      default: 'Applied',
-    },
-  },
-  { timestamps: true }
-);
-
-const Job = mongoose.model('job', jobSchema);
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -34,7 +19,19 @@ const userSchema = new mongoose.Schema({
   },
   values: [String],
   priorities: [String],
-  jobs: [jobSchema],
+  jobs: [{
+    company: String,
+    jobTitle: String,
+    status: {
+      type: String,
+      enum: ['Applied', 'Interviewed', 'Hired'],
+      default: 'Applied',
+    },
+    link: String,
+    notes: String,
+    values: [String],
+    priorities: [String],
+  }],
 });
 
 const User = mongoose.model('user', userSchema);
@@ -43,7 +40,7 @@ const sessionSchema = new mongoose.Schema({
   userID: String,
   createdAt: {
     type: Date,
-    expires: 30,
+    expires: 1200,
     default: Date.now,
   },
 });
@@ -52,6 +49,5 @@ const Session = mongoose.model('session', sessionSchema);
 
 module.exports = {
   User,
-  Job,
   Session,
 };
