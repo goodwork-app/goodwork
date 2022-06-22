@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-//Cookie parser
+//Cookie parsing
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
