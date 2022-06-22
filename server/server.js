@@ -1,14 +1,9 @@
 const express = require('express')
 const path = require('path');
-const app = express()
+const app = express();
+const PORT = 3000;
 
-app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
-
-app.listen(3000, () => {
-  console.log("Hi guys!")
+app.listen(PORT, () => {
+  console.log(`Listening on PORT ${PORT}`);
 })

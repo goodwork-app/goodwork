@@ -20,6 +20,20 @@ const config = {
     port: 8080,
     hot: true,
     historyApiFallback: true,
+    proxy: {
+      '/job': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/auth/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/user/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      }
+    },
   },
   module: {
     rules: [

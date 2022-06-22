@@ -1,19 +1,17 @@
-import React from "react";
-// import { useNavigate } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { useNavigate } from 'react-router-dom';
+import JobCard from './jobCard.jsx';
+import { setActiveJob, activeJob, jobsList, jobValuesList, jobPrioritiesList } from '../redux/jobSlice';
 import NavBar from './nav.jsx';
-// import { Link } from 'react-router-dom';
-// import { Card, Button } from 'react-bootstrap'
-
 
 function Dashboard() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   return (
-    <div>
-      {/* <Link to="/dashboard" className="btn btn-primary">Dashboard</Link> */}
-
+    <Fragment>
       <NavBar />
-    </div>
+      <JobCard />
+    </Fragment>
   )
 }
 
