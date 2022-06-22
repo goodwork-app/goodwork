@@ -1,24 +1,17 @@
 import React from 'react';
-import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, Container, Button } from 'react-bootstrap';
 
-export default function NavBar() {
+function DashNav() {
   return (
     <div>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">this is goodwork</Navbar.Brand>
+          <Navbar.Brand href="/">this is goodwork</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Add Values</Nav.Link>
-              <Nav.Link href="#link">Add Priorities</Nav.Link>
-              {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown> */}
+              <Nav.Link href="#job">Add a Job</Nav.Link>
+              <Nav.Link href="/profile">View Profile</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -26,3 +19,26 @@ export default function NavBar() {
     </div>
   )
 }
+
+function ProfileNav() {
+  return (
+    <div>
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">this is goodwork</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/dashboard">View Dashboard</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
+  )
+}
+
+export {
+  DashNav,
+  ProfileNav
+} 
