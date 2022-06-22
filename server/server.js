@@ -4,10 +4,12 @@ const app = express();
 const PORT = 3000;
 
 // Require in routers.
-// const authRouter = require('./routes/authRouter');
+const authRouter = require('./routes/authRouter');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
-const authRouter = require('./routes/authRouter');
+
+// Parse incoming json.
+app.use(express.json());
 
 // Serves static file from the dist directory.
 app.use(express.static(path.resolve(__dirname, '../dist')));
@@ -22,7 +24,7 @@ app.use('/job', jobRouter);
 app.use('/user', userRouter);
 
 // Error handler for requests to undefined routes.
-app.use('*', (req, res) =>
+app.use((req, res) =>
   res.status(404).send('Cannot server request to undefined endpoint')
 );
 
@@ -41,6 +43,7 @@ app.use((err, req, res, next) => {
   return res.status(customError.status).json(customError.message);
 });
 
+// Connect the server to a port.
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
