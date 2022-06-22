@@ -15,9 +15,6 @@ const authRouter = require('./routes/authRouter');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
 
-// Parse incoming json.
-app.use(express.json());
-
 // Serves static file from the dist directory.
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
