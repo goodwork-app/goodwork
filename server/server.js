@@ -11,9 +11,9 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Require in routers.
+const authRouter = require('./routes/authRouter');
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
-const authRouter = require('./routes/authRouter');
 
 // Serves static file from the dist directory.
 app.use(express.static(path.resolve(__dirname, '../dist')));
@@ -28,8 +28,8 @@ app.use('/job', jobRouter);
 app.use('/user', userRouter);
 
 // Error handler for requests to undefined routes.
-app.use('*', (req, res) =>
-  res.status(404).send('Cannot server request to undefined endpoint')
+app.use((req, res) =>
+  res.status(404).send('Cannot serve request to undefined endpoint')
 );
 
 // Global error handler.
@@ -47,6 +47,7 @@ app.use((err, req, res, next) => {
   return res.status(customError.status).json(customError.message);
 });
 
+// Connect the server to a port.
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
