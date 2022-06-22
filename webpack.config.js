@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -20,6 +19,21 @@ const config = {
     compress: true,
     port: 8080,
     hot: true,
+    historyApiFallback: true,
+    proxy: {
+      '/job': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/auth/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+      '/user/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+      }
+    },
   },
   module: {
     rules: [
