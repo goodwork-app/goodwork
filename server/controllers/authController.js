@@ -73,7 +73,7 @@ authController.authenticateUser = function (req, res, next) {
     .then((foundUser) => {
       console.log('Results of looking for session: ', foundUser);
       if(foundUser){
-        return next()
+        return next();
       } else {
         res.sendStatus(401);
       }

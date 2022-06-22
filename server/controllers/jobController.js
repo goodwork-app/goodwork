@@ -3,7 +3,7 @@ const { User } = require('../models/models');
 const jobController = {};
 
 jobController.addJob = (req, res, next) => {
-  const { id } = req.cookies.sessionID;
+  const id = req.cookies.sessionID;
   const { jobID, company, jobTitle, status, link, notes, values, priorities } =
     req.body;
   const job = {
@@ -30,7 +30,7 @@ jobController.addJob = (req, res, next) => {
 };
 
 jobController.removeJob = (req, res, next) => {
-  const { id } = req.cookies.sessionID;
+  const id = req.cookies.sessionID;
   const { jobID } = req.body;
   User.findOneAndUpdate({ _id: id }, { $pull: { jobs: { _id: jobID } } })
     .then((dbRes) => next())
