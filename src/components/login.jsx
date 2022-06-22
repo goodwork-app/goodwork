@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button }  from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { grabUsername, currUser, userLoggedIn } from '../redux/usernameSlice';
+
 
 function LoginModule() {
   const [ username, setUsername ] = useState('');
@@ -64,6 +66,7 @@ function LoginModule() {
 
   return (
     <div className='centerContainer'>
+      <Link to="/dashboard" className="btn btn-primary">Dashboard</Link>
       <h1>Welcome to goodwork!</h1>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicUserName">
