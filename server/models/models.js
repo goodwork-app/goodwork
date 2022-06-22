@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config;
 
-const MONGO_URI =
-  'mongodb+srv://goodwork:goodwork-la50@goodwork-cluster.jhyos.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
   .connect(MONGO_URI, { dbName: 'goodwork' })
