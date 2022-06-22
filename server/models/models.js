@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const MONGO_URI =
-  'mongodb+srv://goodwork:goodwork-la50@goodwork-cluster.jhyos.mongodb.net/?retryWrites=true&w=majority';
+  //'mongodb+srv://goodwork:goodwork-la50@goodwork-cluster.jhyos.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://james:james@cluster0.kb3y4.mongodb.net/goodwork?retryWrites=true&w=majority'
 
 mongoose
   .connect(MONGO_URI, { dbName: 'goodwork' })
@@ -47,7 +48,7 @@ const sessionSchema = new mongoose.Schema({
   userID: String,
   createdAt: {
     type: Date,
-    expires: 30,
+    expires: 1200,
     default: Date.now,
   },
 });
@@ -58,4 +59,4 @@ module.exports = {
   User,
   Job,
   Session,
-};
+}; 
