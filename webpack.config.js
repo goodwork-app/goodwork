@@ -16,9 +16,24 @@ const config = {
       publicPath: '/dist',
       directory: path.join(__dirname, 'dist'),
     },
-    compress: true,
-    port: 8080,
-    hot: true,
+    proxy: {
+    '/job': {
+      target: 'http://localhost:3000',
+      secure: false,
+    },
+    '/auth/**': {
+      target: 'http://localhost:3000',
+      secure: false,
+    },
+    '/user/**': {
+      target: 'http://localhost:3000',
+      secure: false,
+    }
+  },
+  compress: true,
+  port: 8080,
+  hot: true,
+  historyApiFallback: true,
   },
   module: {
     rules: [

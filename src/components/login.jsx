@@ -1,33 +1,65 @@
 import React, { useState } from 'react';
 import { Form, Button }  from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { grabUsername, currUser } from '../redux/currUser';
+import { grabUsername, currUser, userLoggedIn } from '../redux/usernameSlice';
 
 function LoginModule() {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const current = useSelector(currUser);
+
+  const userData = {
+    username: username,
+    password: password
+  };
 
   const login = () => {
     // Check if username and password are valid (not empty string and string length > 5)
     if (username.length < 5 || password.length < 5) {
-      window.alert('Invalid username or password');
+      window.alert('Invalid username or password, must both be 5 characters or more');
       return;
     };
-    // Make a post req to server
+
+    // dispatch(userLoggedIn());
     // Once server verifies login is valid and sends back user data in response
+    
+    // Make a post req to server
+    // fetch('/auth/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(userData)
+    // })
+    // .then(response => response.json())
+    // .then()
+    
     // Update store to identify current username
-    // Updates state store to hold current user
-    dispatch(grabUsername(username));
-    console.log(current);
     // Route user to dashboard page
+    navigate("/dashboard");
   };
 
   const register = () => {
     // Verifies valid arguments
+    if (username.length < 5 || password.length < 5) {
+      window.alert('Invalid username or password, must both be 5 characters or more');
+      return;
+    };
     // Post req to server
-    // Routes user into dashboard page
+    // fetch('/auth/signup', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(userData)
+    // })
+    // .then(response => response.json())
+    // .then()
+
+    // Routes user into profile page
+    // navigate("/profile");
   };
 
   return (
@@ -45,10 +77,17 @@ function LoginModule() {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
         </Form.Group>
-        <Button onClick={register} className="me-2 bg-secondary">
-          Register
+        <Button onClick={() => {
+          register();
+          dispatch(grabUsername(username));
+        }}
+          className="me-2 bg-secondary">
+            Register
         </Button>
-        <Button onClick={login}>
+        <Button onClick={() => {
+          login();
+          dispatch(grabUsername(username));
+        }}>
           Login
         </Button>
       </Form>

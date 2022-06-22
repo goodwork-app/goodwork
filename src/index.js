@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 
 const mountNode = document.getElementById("app");
+
 const root = createRoot(mountNode);
 root.render(
   <Provider store={store}>
