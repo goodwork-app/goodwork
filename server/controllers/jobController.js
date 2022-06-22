@@ -1,12 +1,12 @@
-const { Job, User } = require('../models/models');
+const { User } = require('../models/models');
 
 const jobController = {};
 
-// Add methods to jobController.
-jobController.createJob = (req, res, next) => {
-  const { company, jobTitle, status, link, notes, values, priorities } =
+jobController.addJob = (req, res, next) => {
+  const { id } = req.cookies.sessionID;
+  const { jobID, company, jobTitle, status, link, notes, values, priorities } =
     req.body;
-  Job.create({
+  const job = {
     company,
     jobTitle,
     status,
@@ -14,23 +14,10 @@ jobController.createJob = (req, res, next) => {
     notes,
     values,
     priorities,
-  })
-    .then((dbRes) => {
-      res.locals.job = dbRes;
-      return next();
-    })
-    .catch((err) =>
-      next({
-        log: 'Error in createJob middleware',
-        status: 500,
-        message: { err: err },
-      })
-    );
-};
+  };
 
-jobController.addJob = (req, res, next) => {
-  const { id } = req.body;
-  const { job } = res.locals;
+  if (jobID) job._id = jobID;
+
   User.findOneAndUpdate({ _id: id }, { $push: { jobs: job } })
     .then((dbRes) => next())
     .catch((err) =>
@@ -43,8 +30,9 @@ jobController.addJob = (req, res, next) => {
 };
 
 jobController.removeJob = (req, res, next) => {
-  const { id, jobID } = req.body;
-  Job.deleteOne({ _id: jobID })
+  const { id } = req.cookies.sessionID;
+  const { jobID } = req.body;
+  User.findOneAndUpdate({ _id: id }, { $pull: { jobs: { _id: jobID } } })
     .then((dbRes) => next())
     .catch((err) =>
       next({

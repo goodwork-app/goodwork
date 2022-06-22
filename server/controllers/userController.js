@@ -4,7 +4,8 @@ const userController = {};
 
 // Add methods to userController.
 userController.addValue = (req, res, next) => {
-  const { id, value } = req.body;
+  const { id } = req.cookies.sessionID;
+  const { value } = req.body;
   User.findOneAndUpdate({ _id: id }, { $push: { values: value } })
     .then((dbRes) => next())
     .catch((err) =>
@@ -17,7 +18,8 @@ userController.addValue = (req, res, next) => {
 };
 
 userController.addPriority = (req, res, next) => {
-  const { id, priority } = req.body;
+  const { id } = req.cookies.sessionID;
+  const { priority } = req.body;
   User.findOneAndUpdate({ _id: id }, { $push: { priorities: priority } })
     .then((dbRes) => next())
     .catch((err) =>
@@ -30,7 +32,8 @@ userController.addPriority = (req, res, next) => {
 };
 
 userController.removeValue = (req, res, next) => {
-  const { id, value } = req.body;
+  const { id } = req.cookies.sessionID;
+  const { value } = req.body;
   User.findOneAndUpdate({ _id: id }, { $pull: { values: value } })
     .then((dbRes) => next())
     .catch((err) =>
@@ -43,7 +46,8 @@ userController.removeValue = (req, res, next) => {
 };
 
 userController.removePriority = (req, res, next) => {
-  const { id, priority } = req.body;
+  const { id } = req.cookies.sessionID;
+  const { priority } = req.body;
   User.findOneAndUpdate({ _id: id }, { $pull: { priorities: priority } })
     .then((dbRes) => next())
     .catch((err) =>

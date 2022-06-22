@@ -2,22 +2,23 @@ const express = require('express');
 const userRouter = express.Router();
 
 // Require in controllers with middleware
+const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 
 // Define routes for userRouter
-userRouter.post('/values', userController.addValue, (req, res) =>
+userRouter.post('/values', authController.authenticateUser, userController.addValue, (req, res) =>
   res.status(200).send('Successfully added value')
 );
 
-userRouter.post('/priorities', userController.addPriority, (req, res) =>
+userRouter.post('/priorities', authController.authenticateUser, userController.addPriority, (req, res) =>
   res.status(200).send('Successfully added priority')
 );
 
-userRouter.delete('/values', userController.removeValue, (req, res) =>
+userRouter.delete('/values', authController.authenticateUser, userController.removeValue, (req, res) =>
   res.status(200).send('Successfully removed value')
 );
 
-userRouter.delete('/priorities', userController.removePriority, (req, res) =>
+userRouter.delete('/priorities', authController.authenticateUser, userController.removePriority, (req, res) =>
   res.status(200).send('Successfully removed priority')
 );
 

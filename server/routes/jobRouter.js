@@ -2,18 +2,19 @@ const express = require('express');
 const jobRouter = express.Router();
 
 // Require in controllers with middleware
+const authController = require('../controllers/authController');
 const jobController = require('../controllers/jobController');
 
 // Define routes for jobRouter
-jobRouter.post('/', jobController.createJob, jobController.addJob, (req, res) =>
+jobRouter.post('/', authController.authenticateUser, jobController.addJob, (req, res) =>
   res.status(200).send('Successfully added job')
 );
 
-// jobRouter.patch('/', jobController.updateJob, (req, res) =>
-//   res.status(200).send('Successfully updated job')
-// );
+jobRouter.patch('/', authController.authenticateUser, jobController.removeJob, jobController.addJob, (req, res) =>
+  res.status(200).send('Successfully updated job')
+);
 
-jobRouter.delete('/', jobController.removeJob, (req, res) =>
+jobRouter.delete('/', authController.authenticateUser, jobController.removeJob, (req, res) =>
   res.status(200).send('Successfully removed job')
 );
 
