@@ -73,11 +73,10 @@ authController.authenticateUser = function (req, res, next) {
     .then((foundUser) => {
       console.log('Results of looking for session: ', foundUser);
       if(foundUser){
-        res.locals.authenticated = true;
+        return next()
       } else {
-        res.locals.authenticated = false;
+        res.sendStatus(401);
       }
-      return next();
     })
     .catch((err) => {
       console.log('An error occurred checking while authenticationg the user: ', err);
