@@ -1,12 +1,20 @@
-import * as React from "react";
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+// import { useNavigate } from 'react-router-dom';
+import NavBar from './nav.jsx';
+// import { Link } from 'react-router-dom';
+// import { Card, Button } from 'react-bootstrap'
 
-export default function Profile() {
-  let navigate = useNavigate();
+
+function Dashboard() {
+  // let navigate = useNavigate();
 
   return (
     <div>
-      this is the dashboard page
+      {/* <Link to="/dashboard" className="btn btn-primary">Dashboard</Link> */}
+
+      <NavBar />
     </div>
   )
 }
+
+export default Dashboard;
