@@ -7,3 +7,12 @@ h1 {
   margin: auto;
   margin-top: 10%;
 }
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  // border: 1px solid black;
+  width: 50%;
+  margin-left: 16%;
+  margin-top: 50px;
+}
